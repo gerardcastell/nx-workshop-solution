@@ -42,6 +42,7 @@ export default async function (tree: Tree, schema: any) {
   // await updateJson(tree, 'workspace.json', (obj) => {
   //   return { ...obj, defaultProject: 'api' };
   // });
+  await formatFiles(tree);
   return () => {
     installPackagesTask(tree);
   };
