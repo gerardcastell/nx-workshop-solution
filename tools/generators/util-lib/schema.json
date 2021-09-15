@@ -18,22 +18,25 @@
       "x-prompt": {
         "message": "Which type of library would you like to generate?",
         "type": "list",
-        "items": [
-          {
-            "value": "store",
-            "label": "store"
-          },
-          {
-            "value": "api",
-            "label": "api"
-          },
-          {
-            "value": "shared",
-            "label": "shared"
-          }
-        ]
-      }
+        "items": []
+      },
+      "items": [
+        {
+          "value": "api",
+          "label": "api"
+        },
+        {
+          "value": "store",
+          "label": "store"
+        },
+        {
+          "value": "shared",
+          "label": "shared"
+        }
+      ]
     }
   },
-  "required": ["name"]
+  "required": [
+    "name"
+  ]
 }
