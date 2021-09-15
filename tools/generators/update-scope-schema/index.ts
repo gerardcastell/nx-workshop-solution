@@ -25,7 +25,7 @@ export default async function (tree: Tree, schema: any) {
     // remove duplicates
     return Array.from(new Set(allScopes));
   }
-  const scopeList = await getScopes(readJson(tree, 'nx.json'));
+  const scopeList: string[] = await getScopes(readJson(tree, 'nx.json'));
 
   await updateJson(tree, 'tools/generators/util-lib/schema.json', (obj) => {
     return {
