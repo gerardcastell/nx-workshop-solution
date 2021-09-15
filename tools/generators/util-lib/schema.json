@@ -32,11 +32,13 @@
         {
           "value": "shared",
           "label": "shared"
+        },
+        {
+          "value": "vide-games",
+          "label": "vide-games"
         }
       ]
     }
   },
-  "required": [
-    "name"
-  ]
+  "required": ["name"]
 }
