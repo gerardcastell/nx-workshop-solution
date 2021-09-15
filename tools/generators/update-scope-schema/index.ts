@@ -25,6 +25,19 @@ export default async function (tree: Tree, schema: any) {
     // remove duplicates
     return Array.from(new Set(allScopes));
   }
+
+  function replaceScopes(content: string, scopes: string[]): string {
+    const joinScopes = scopes.map((s) => `'${s}'`).join(' | ');
+    const PATTERN = /interface Schema \{\n.*\n.*\n\}/gm;
+    return content.replace(
+      PATTERN,
+      `interface Schema {
+    name: string;
+    directory: ${joinScopes};
+  }`
+    );
+  }
+
   const scopeList: string[] = await getScopes(readJson(tree, 'nx.json'));
 
   await updateJson(tree, 'tools/generators/util-lib/schema.json', (obj) => {
@@ -39,6 +52,14 @@ export default async function (tree: Tree, schema: any) {
       },
     };
   });
+
+  await tree.write(
+    'tools/generators/util-lib/index.ts',
+    await replaceScopes(
+      tree.read('tools/generators/util-lib/index.ts').toString(),
+      scopeList
+    )
+  );
   // await updateJson(tree, 'workspace.json', (obj) => {
   //   return { ...obj, defaultProject: 'api' };
   // });
