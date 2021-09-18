@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { formatRating } from '@bg-hoard/store/util-formatters';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'bg-hoard-root',
@@ -9,8 +10,9 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppComponent {
   title = 'Board Game Hoard';
-  // games = getAllGames();
+  games: Observable<any[]>;
   formatRating = formatRating;
-  constructor(private http: HttpClient) {}
-  games = this.http.get<[]>('/api/games');
+  constructor(private http: HttpClient) {
+    this.games = this.http.get<[]>('/api/games');
+  }
 }
